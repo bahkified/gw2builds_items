@@ -1,0 +1,10 @@
+extends layout
+
+block bodyContainer
+    h2 #{item.name} (id: #{item.item_id})
+    p Description: #{item.description}
+    | Type: #{item.type} <br/>
+    | Level: #{item.level} <br/>
+    | Rarity: #{item.rarity} <br/>
+div(style="margin: 36px;")
+    p #{string}

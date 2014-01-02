@@ -1,0 +1,79 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'idea'
+apply plugin: 'war'
+apply plugin: 'tomcat'
+apply plugin: 'rebel'
+
+sourceCompatibility = 1.6
+version = '1.0'
+def tomcatVersion = '7.0.11'
+def springVersion = '3.2.4.RELEASE'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'org.gradle.api.plugins:gradle-tomcat-plugin:1.0'
+        classpath group: 'org.zeroturnaround', name: 'gradle-jrebel-plugin', version: '1.1.2'
+    }
+}
+
+repositories {
+    maven {
+        url "http://mdllpbuilddev1.loe.corp:8081/artifactory/repo1"
+    }
+
+    maven {
+        url "http://mdllpbuilddev1:8081/artifactory/ext-release-local"
+    }
+
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    providedCompile "javax.servlet:servlet-api:2.5"
+
+    compile "org.springframework:spring-webmvc:${springVersion}"
+    compile "org.springframework:spring-core:${springVersion}"
+    compile "org.springframework:spring-context:${springVersion}"
+    compile "org.springframework:spring-context-support:${springVersion}"
+
+    compile "org.codehaus.jackson:jackson-mapper-asl:1.9.12"
+    compile "org.codehaus.jackson:jackson-core-asl:1.9.12"
+    compile "de.neuland:spring-jade4j:0.3.3"
+
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}"
+    tomcat("org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}") {
+        exclude group: 'org.eclipse.jdt.core.compiler', module: 'ecj'
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = 1.9
+}
+
+war {
+    dependsOn generateRebel
+    baseName = 'gw2item'
+}
+
+tomcatRun {
+    httpPort = 8090
+    stopKey = 'foo'
+}
+
+tomcatRunWar {
+    httpPort = 8090
+    stopKey = 'foo'
+}
+
+tomcatStop {
+    stopKey = 'foo'
+}

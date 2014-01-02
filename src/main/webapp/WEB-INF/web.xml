@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee">
+    <display-name>Prototype Web Application</display-name>
+    <distributable/>
+
+    <servlet>
+        <servlet-name>item</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>item</servlet-name>
+        <url-pattern>/item/*</url-pattern>
+    </servlet-mapping>
+</web-app>

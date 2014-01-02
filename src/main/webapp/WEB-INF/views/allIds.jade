@@ -1,0 +1,11 @@
+extends layout
+
+block bodyContainer
+    div
+        ul
+            each id, i in items
+                li: a(href=details_prefix + "?id=" + id) Item #{i}: #{id}
+    div.pager
+        ul
+            li: a(class='previous', href='#') Previous
+            li: a(class='next', href='#') Next
