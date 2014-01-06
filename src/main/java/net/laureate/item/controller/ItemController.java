@@ -40,6 +40,7 @@ public class ItemController {
             page = 0;
         }
 
+        // TODO: actually implement paging
         int[] items_in_page = new int[PAGE_SIZE];
         for(int i = 0; i < PAGE_SIZE; i++) {
 

@@ -1,0 +1,14 @@
+extends layout
+
+block bodyContainer
+    div
+        p ...&nbsp; #{build}
+    form(action='createBuild', method='post')
+        div.input-group
+            span.input-group-addon Enter id:
+            input.form-control(type='text', name=build.id)
+        div.input-group
+            span.input-group-addon Enter content:
+            input.form-control(type='text', name=build.content)
+        div
+            input.form-control(type='submit', value='Submit')

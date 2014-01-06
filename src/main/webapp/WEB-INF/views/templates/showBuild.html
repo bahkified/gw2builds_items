@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Build</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h1>Build</h1>
+<p th:text="'id: ' + ${build.id}"/>
+<p th:text="'content: ' + ${build.content}"/>
+<a href="/createBuild">New Build</a>
+</body>
+</html>
