@@ -3,12 +3,12 @@ apply plugin: 'maven'
 apply plugin: 'idea'
 apply plugin: 'war'
 apply plugin: 'tomcat'
-apply plugin: 'rebel'
 
 sourceCompatibility = 1.6
 version = '1.0'
 def tomcatVersion = '7.0.11'
 def springVersion = '3.2.4.RELEASE'
+def thymeVersion = '2.1.2.RELEASE'
 
 buildscript {
     repositories {
@@ -17,7 +17,6 @@ buildscript {
 
     dependencies {
         classpath 'org.gradle.api.plugins:gradle-tomcat-plugin:1.0'
-        classpath group: 'org.zeroturnaround', name: 'gradle-jrebel-plugin', version: '1.1.2'
     }
 }
 
@@ -41,10 +40,15 @@ dependencies {
     compile "org.springframework:spring-core:${springVersion}"
     compile "org.springframework:spring-context:${springVersion}"
     compile "org.springframework:spring-context-support:${springVersion}"
+    compile 'org.slf4j:slf4j-api:1.6.0'
+    compile 'ch.qos.logback:logback-classic:1.0.3'
 
     compile "org.codehaus.jackson:jackson-mapper-asl:1.9.12"
     compile "org.codehaus.jackson:jackson-core-asl:1.9.12"
     compile "de.neuland:spring-jade4j:0.3.3"
+
+    compile "org.thymeleaf:thymeleaf:${thymeVersion}"
+    compile "org.thymeleaf:thymeleaf-spring3:${thymeVersion}"
 
     testCompile group: 'junit', name: 'junit', version: '4.11'
 
@@ -60,7 +64,6 @@ task wrapper(type: Wrapper) {
 }
 
 war {
-    dependsOn generateRebel
     baseName = 'gw2item'
 }
 
